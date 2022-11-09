@@ -15,7 +15,7 @@ const Home = () => {
 	const UploadData = () => {
 		fetch('https://assets.breatheco.de/apis/fake/todos/user/AgustinPungitore', {
 	  method: "PUT",
-	  body: JSON.stringify(listOfTodos),
+	  body: JSON.stringify(tarea),
 	  headers: {
 		"Content-Type": "application/json"
 	  }
@@ -53,8 +53,9 @@ const Home = () => {
 		
 		if (e.key === "Enter"){
 			console.log(tarea)	
-			setLista([...lista,tarea])
+			setLista([...lista, { label: tarea, done: false }])
 			setTarea("")
+			UploadData([...lista, { label: tarea, done: false }])
 		}
 	}
 
@@ -82,8 +83,8 @@ const Home = () => {
 		</div>
 		<div className="container col-8 text-center">
 			<ul>
-			{lista.map ((item, index) => {return (<li  key={index}> {item} </li>)})}
-			{lista.map ((item, index) => {return (<li  key={index}> {item} <button onClick={()=>eliminarTarea(index)}>🗑️</button></li>)})} 
+			{/* {lista.map ((item, index) => {return (<li  key={index}> {item.label} </li>)})} */}
+			{lista.map ((item, index) => {return (<li  key={index}> {item.label} <button onClick={()=>eliminarTarea(index)}>🗑️</button></li>)})} 
 			</ul>
 		</div>
 	</>
